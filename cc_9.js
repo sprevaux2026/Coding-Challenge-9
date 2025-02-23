@@ -72,6 +72,14 @@ class Company {
             return total + employee.calculateAnnualSalary(); // total payroll
         }, 0);
     } // payroll system
+        // Task 5: Implementing Promotions
+        promoteToManager(employee, teamSize) {
+            const index = this.employees.indexOf(employee);
+            if (index !== -1) {
+                this.employees[index] = new Manager(employee.name, employee.id, employee.department, employee.salary, teamSize);
+            }
+        }
+    
 }
 
 // Test Case
@@ -80,3 +88,5 @@ company.addEmployee(emp1);
 company.addEmployee(mgr1);
 company.listEmployees();
 console.log(company.calculateTotalPayroll()); // Expected payroll output
+
+   
