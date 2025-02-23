@@ -27,14 +27,21 @@ class Manager extends Employee {
         super(name, id, department, salary);
         this.teamSize = teamSize;
     }
-//get the details of the manager
-    getDetails() {
+  // Get the details of the manager
+      getDetails() {
         return `Manager: ${this.name}, ID: ${this.id}, Department: ${this.department}, Salary: $${this.salary}, Team Size: ${this.teamSize}`;
     }
-// calculate bonus for the manager
-    calculateBonus() {
-        return this.salary * 12 * 0.1;
-    }
+
+
+// Calculate bonus for the manager
+calculateBonus() {
+    return this.salary * 12 * 0.1;
+}
+
+// Modify calculateAnnualSalary() to include bonus
+calculateAnnualSalary() {
+    return super.calculateAnnualSalary() + this.calculateBonus();
+}
 }
 
 // Test Case
@@ -48,14 +55,23 @@ class Company {
         this.name = name;
         this.employees = [];
     }
-//add employee to the company
+
+    // Add employee to the company
     addEmployee(employee) {
         this.employees.push(employee);
     }
-// list all the employees in the company
+
+    // List all the employees in the company
     listEmployees() {
         this.employees.forEach(employee => console.log(employee.getDetails()));
     }
+
+    // Task 4 modify payroll system
+    calculateTotalPayroll() {  
+        return this.employees.reduce((total, employee) => {
+            return total + employee.calculateAnnualSalary(); // total payroll
+        }, 0);
+    } // payroll system
 }
 
 // Test Case
@@ -63,3 +79,4 @@ const company = new Company("TechCorp");
 company.addEmployee(emp1);
 company.addEmployee(mgr1);
 company.listEmployees();
+console.log(company.calculateTotalPayroll()); // Expected payroll output
